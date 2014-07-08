@@ -57,7 +57,7 @@ MIDDLEWARE_CLASSES = tuple(MIDDLEWARE_CLASSES) + (
 # BrowserID configuration
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'django_browserid.auth.BrowserIDBackend',
+    '%s.auth.backends.SocorroBrowserIDBackend' % PROJECT_MODULE,
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS += (
@@ -297,6 +297,10 @@ BROWSERID_VERIFY_CLASS = '%s.auth.views.CustomBrowserIDVerify' % PROJECT_MODULE
 
 # For a more friendly Persona pop-up
 BROWSERID_REQUEST_ARGS = {'siteName': 'Mozilla Crash Reports'}
+
+# If set to a string value, automatically give superuser access to all
+# users that login in with an email from the given domain.
+AUTO_SUPERUSER_USERS_IN_DOMAIN = None
 
 # Analyze all model fetches
 ANALYZE_MODEL_FETCHES = False
